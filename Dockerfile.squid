@@ -1,0 +1,5 @@
+FROM alpine:latest
+RUN apk add --no-cache squid
+VOLUME [ "/var/cache/squid" ]
+USER squid
+CMD ["sh", "-c", "/usr/sbin/squid -f /etc/squid/squid.conf --foreground -z && exec /usr/sbin/squid -f /etc/squid/squid.conf -NYCd 1"]

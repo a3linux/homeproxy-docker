@@ -1,0 +1,8 @@
+FROM alpine:latest
+
+USER root
+RUN apk add --no-cache privoxy
+
+EXPOSE 8118
+USER privoxy
+CMD [ "/usr/sbin/privoxy", "--no-daemon", "/etc/privoxy/config" ]

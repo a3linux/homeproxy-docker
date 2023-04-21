@@ -1,0 +1,11 @@
+FROM alpine:latest
+
+USER root
+RUN apk add --no-cache tor
+
+RUN mkdir -p /var/lib/tor && chown -R tor:nogroup /var/lib/tor
+VOLUME /var/lib/tor
+
+EXPOSE 9050 9051
+USER tor
+CMD [ "sh", "-c", "tor", "-f", "/etc/tor/torrc" ]

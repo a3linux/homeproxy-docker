@@ -1,0 +1,46 @@
+version: "3.9"
+name: homeproxy
+
+networks:
+  default:
+    name: homeproxy
+
+services:
+  tor:
+    container_name: homeproxy_tor
+    image: homeproxy-tor
+    restart: unless-stopped
+    build:
+      dockerfile: ./Dockerfile.tor
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 32M
+  privoxy:
+    container_name: homeproxy_privoxy
+    image: homeproxy-privoxy
+    restart: unless-stopped
+    build:
+      dockerfile: ./Dockerfile.privoxy
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+        reservations:
+          memory: 8M
+  squid:
+    container_name: homeproxy_squid
+    image: homeproxy-squid
+    restart: unless-stopped
+    build:
+      dockerfile: ./Dockerfile.squid
+    ports:
+      - 3128:3128
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 32M

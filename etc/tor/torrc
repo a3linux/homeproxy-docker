@@ -1,0 +1,16 @@
+DataDirectory /var/lib/tor
+
+SocksPolicy accept 10.0.0.0/8
+SocksPolicy accept 172.16.0.0/12
+SocksPolicy accept 192.168.0.0/16
+SocksPolicy reject *
+
+SOCKSPort 0.0.0.0:9050
+ControlPort 0.0.0.0:9051
+
+Log notice stdout
+
+CircuitBuildTimeout 5
+KeepalivePeriod 60
+NewCircuitPeriod 15
+NumEntryGuards 8
